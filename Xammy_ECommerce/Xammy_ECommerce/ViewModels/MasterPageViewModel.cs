@@ -11,16 +11,19 @@ namespace Xammy_ECommerce.ViewModels
 {
     public class MasterPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         public DelegateCommand<string> NavigateCommand { get; private set; }
         public MasterPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            NavigateCommand = new DelegateCommand<string>(NavigateCommandExecuted);
+            _navigationService = navigationService;
+            NavigateCommand = new DelegateCommand<string>(NavigateProduct);
         }
 
-        private async void NavigateCommandExecuted(string categoryName)
+        private void NavigateProduct(string categoryName)
         {
-            var nagivationParams = new NavigationParameters { { "CategoryName", categoryName } };
-            await NavigationService.NavigateAsync("/ProductsPage",nagivationParams);
+            NavigationParameters nagivationParams = new NavigationParameters();
+            nagivationParams.Add("CategoryName",categoryName);
+            _navigationService.NavigateAsync("ProductsPage",nagivationParams);
         }
     }
 }

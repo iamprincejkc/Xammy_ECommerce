@@ -12,7 +12,7 @@ using Xammy_ECommerce.Views;
 
 namespace Xammy_ECommerce.ViewModels
 {
-    public class ProductsPageViewModel : ViewModelBase, INavigatedAware
+    public class ProductsPageViewModel : ViewModelBase
     {
         private readonly IProductsService _productsService;
 
@@ -20,7 +20,11 @@ namespace Xammy_ECommerce.ViewModels
         public ObservableCollection<ProductModel> ProductsList
         {
             get => _ProductsList;
-            set => SetProperty(ref _ProductsList, value);
+            set
+            {
+                SetProperty(ref _ProductsList, value);
+                RaisePropertyChanged("ProductsList");
+            }
         }
 
         private ProductModel _SelecetdProduct;
@@ -42,9 +46,11 @@ namespace Xammy_ECommerce.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
         }
         public override void Initialize(INavigationParameters parameters)
         {
+            base.Initialize(parameters);
             string categoryName = parameters.GetValue<string>("CategoryName");
             Title = categoryName;
             InitData(categoryName);
