@@ -21,7 +21,7 @@ namespace Xammy_ECommerce
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MasterPage");
+            await NavigationService.NavigateAsync("MasterPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

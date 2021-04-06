@@ -34,7 +34,7 @@ namespace Xammy_ECommerce.ViewModels
 
 
         public ProductsPageViewModel(INavigationService navigationService, IProductsService productsService)
-            :base(navigationService)
+            : base(navigationService)
         {
             _productsService = productsService;
             ShowProductDetailsCommand = new DelegateCommand<ProductModel>(ShowProductDetails);
@@ -42,6 +42,7 @@ namespace Xammy_ECommerce.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            base.OnNavigatedTo(parameters);
         }
         public override void Initialize(INavigationParameters parameters)
         {
@@ -53,7 +54,7 @@ namespace Xammy_ECommerce.ViewModels
         private void ShowProductDetails(ProductModel product)
         {
             var navigationParams = new NavigationParameters { { "Product", JsonConvert.SerializeObject(product) } };
-            NavigationService.NavigateAsync(nameof(ProductDetailsPage), navigationParams);
+            NavigationService.NavigateAsync("ProductDetailsPage", navigationParams);
         }
 
         private void InitData(string categoryName)

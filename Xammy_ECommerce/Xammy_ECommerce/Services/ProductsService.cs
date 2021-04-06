@@ -13,23 +13,34 @@ namespace Xammy_ECommerce.Services
         public ObservableCollection<ProductModel> GetProductsByGategoryName(string categoryName)
         {
             ProductsEnum productCategory;
-            List<ProductModel> mockList = new List<ProductModel>
+
+            ObservableCollection<ProductModel> mockList = new ObservableCollection<ProductModel>
             {
                 new ProductModel{ID = 1, Category = ProductsEnum.Pants, Name = "High rise skinny jeans", Price = 50, Thumbnail = "https://m1.jeans-industry.fr/201863-thickbox/jeans-bleu-delave-taille-haute.jpg" },
                 new ProductModel{ID = 2, Category = ProductsEnum.Pants, Name = "High waist destroyed jeans", Price = 50, Thumbnail = "https://m1.jeans-industry.fr/210026-thickbox/jeans-taille-haute-destroy.jpg" },
-                new ProductModel{ID = 3, Category = ProductsEnum.Sweaters, Name = "Long dress", Price = 50, Thumbnail = "https://m1.jeans-industry.fr/195837-thickbox/robe-longue.jpg" },
-                new ProductModel{ID = 4, Category = ProductsEnum.Sweaters, Name = "Ribbed belt long dress", Price = 50, Thumbnail = "https://m3.jeans-industry.fr/190595-thickbox/robe-longue-cotele-a-ceinture.jpg" },
-                new ProductModel{ID = 5, Category = ProductsEnum.Sweaters, Name = "Embroidery and lace dress", Price = 50, Thumbnail = "https://m3.jeans-industry.fr/181489-thickbox/robe-a-broderies-et-dentelles.jpg" },
-                new ProductModel{ID = 6, Category = ProductsEnum.Sweaters, Name = "Ribbed gathered dress", Price = 50, Thumbnail = "https://m2.jeans-industry.fr/227238-thickbox/robe-cotelee-froncee.jpg" },
+                new ProductModel{ID = 3, Category = ProductsEnum.Dresses, Name = "Long dress", Price = 50, Thumbnail = "https://m1.jeans-industry.fr/195837-thickbox/robe-longue.jpg" },
+                new ProductModel{ID = 4, Category = ProductsEnum.Dresses, Name = "Ribbed belt long dress", Price = 50, Thumbnail = "https://m3.jeans-industry.fr/190595-thickbox/robe-longue-cotele-a-ceinture.jpg" },
+                new ProductModel{ID = 5, Category = ProductsEnum.Dresses, Name = "Embroidery and lace dress", Price = 50, Thumbnail = "https://m3.jeans-industry.fr/181489-thickbox/robe-a-broderies-et-dentelles.jpg" },
+                new ProductModel{ID = 6, Category = ProductsEnum.Dresses, Name = "Ribbed gathered dress", Price = 50, Thumbnail = "https://m2.jeans-industry.fr/227238-thickbox/robe-cotelee-froncee.jpg" },
             };
 
             productCategory = (ProductsEnum)Enum.Parse(typeof(ProductsEnum), categoryName);
-            return (ObservableCollection<ProductModel>)mockList.Where(x => x.Category == productCategory);
+
+
+            ObservableCollection<ProductModel> item = new ObservableCollection<ProductModel>();
+            mockList.Distinct()
+                .Where(x => x.Category == productCategory)
+                .ToList()
+                .ForEach(i =>item.Add(i)); 
+            
+
+            //item.Add(mockList.Where(x => x.Category == productCategory).FirstOrDefault());
+            return item;
         }
 
         public ObservableCollection<string> GetProductsImages(long productId)
         {
-            List<ProductImagesModel> images = new List<ProductImagesModel>
+            ObservableCollection<ProductImagesModel> images = new ObservableCollection<ProductImagesModel>
             {
                 new ProductImagesModel{ID = 1, ProductId = 1, Image="https://m1.jeans-industry.fr/201863-thickbox/jeans-bleu-delave-taille-haute.jpg"},
                 new ProductImagesModel{ID = 2, ProductId = 1, Image="https://m1.jeans-industry.fr/201864-thickbox/jeans-bleu-delave-taille-haute.jpg"},
@@ -54,7 +65,14 @@ namespace Xammy_ECommerce.Services
                 new ProductImagesModel{ID = 21, ProductId = 6, Image="https://m2.jeans-industry.fr/227238-thickbox/robe-cotelee-froncee.jpg"},
             };
 
-            return (ObservableCollection<string>)images.Where(x => x.ProductId == productId).Select(x => x.Image);
+
+            ObservableCollection<string> item = new ObservableCollection<string>();
+            images.Distinct()
+                .Where(x => x.ProductId == productId)
+                .ToList()
+                .ForEach(i => item.Add(i.Image));
+
+            return item;
         }
     }
 }

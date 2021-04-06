@@ -8,7 +8,7 @@ namespace Xammy_ECommerce.Interface
 {
     public interface IProductsService
     {
-         ObservableCollection<ProductModel> GetProductsByGategoryName(string categoryName);
+        ObservableCollection<ProductModel> GetProductsByGategoryName(string categoryName);
         ObservableCollection<string> GetProductsImages(long productId);
     }
 }

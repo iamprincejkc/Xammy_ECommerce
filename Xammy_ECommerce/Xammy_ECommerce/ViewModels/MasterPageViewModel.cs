@@ -19,8 +19,8 @@ namespace Xammy_ECommerce.ViewModels
 
         private async void NavigateCommandExecuted(string categoryName)
         {
-            var nagivationParams = new NavigationParameters { { "CategoryName", categoryName } };
-            await NavigationService.NavigateAsync("/ProductsPage",nagivationParams);
+            var navigationParams = new NavigationParameters { { "CategoryName", categoryName } };
+            await NavigationService.NavigateAsync("NavigationPage/ProductsPage",navigationParams);
         }
     }
 }

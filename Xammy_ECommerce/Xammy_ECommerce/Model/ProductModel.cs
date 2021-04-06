@@ -18,7 +18,7 @@ namespace Xammy_ECommerce.Model
 
     public enum ProductsEnum
     {
-        Sweaters = 0,
+        Dresses = 0,
         Pants = 2,
         Shoes = 3
     }

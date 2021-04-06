@@ -5,6 +5,7 @@
                   prism:ViewModelLocator.AutowireViewModel="True"
                   NavigationPage.HasBackButton="False"  
                   xmlns:Views="clr-namespace:Xammy_ECommerce.Views"
+                  x:Name="mdp"
                   x:Class="Xammy_ECommerce.Views.MasterPage">
 
     <MasterDetailPage.Master>

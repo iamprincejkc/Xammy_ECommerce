@@ -11,7 +11,7 @@ using Xammy_ECommerce.Model;
 
 namespace Xammy_ECommerce.ViewModels
 {
-    public class ProductDetailsPageViewModel : ViewModelBase
+    public class ProductDetailsPageViewModel : ViewModelBase, INavigatedAware
     {
         #region Properties
         private readonly IProductsService productsService;
@@ -99,11 +99,12 @@ namespace Xammy_ECommerce.ViewModels
 
         public override void Initialize(INavigationParameters parameters)
         {
-            productModel = JsonConvert.DeserializeObject<ProductModel>(parameters.GetValue<string>("Product"));
-            Title = productModel.Name;
-            ProductImagesList = productsService.GetProductsImages(productModel.ID);
-            ProductName = productModel.Name;
-            Price = productModel.Price;
+            var val = parameters.GetValue<ProductModel>("xamlParam");
+            //var productModel = JsonConvert.DeserializeObject<ProductModel>(val);
+            Title = val.Name;
+            ProductImagesList = productsService.GetProductsImages(val.ID);
+            ProductName = val.Name;
+            Price = val.Price;
 
             // Fake data 
             SizeList = new List<string>() { "S", "M", "L" };
